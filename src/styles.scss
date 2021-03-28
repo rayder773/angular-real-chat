@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+.common-button {
+  border-radius: 5px;
+  background: none;
+  border: 1px solid;
+  height: 40px;
+  cursor: pointer;
+}
+
+.commot-input {
+  border-radius: 5px;
+  margin-bottom: 1em;
+  height: 40px;
+  padding-left: 1em;
+  border: 1px solid rgb(82, 77, 77);
+}
+
+* {
+  font-family: 'Courier New', Courier, monospace;
+  word-break: break-word;
+}
+
+ul {
+  list-style: none;
+}
+
+textarea {
+  resize: none;
+}
+
+*[contenteditable="true"] {
+  border: 2px solid;
+}

@@ -1,0 +1,72 @@
+.chat-component {
+    display: flex;
+}
+
+.room-section {
+    max-width: 400px;
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.room-section_rooms {
+    padding: 2em 2em 1em;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+}
+
+.room-section_room-item {
+    border: 1px solid;
+    padding: 2em 2em 4em;
+    margin-bottom: 1em;
+    position: relative;
+
+    &.active {
+        background: red;
+    }
+}
+
+.room-name {
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 1em;
+}
+
+.delete-room-button {
+    background: none;
+    border: 1px solid;
+    border-radius: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background: red;
+    }
+}
+
+.edit-room-button {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.save-room-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.add-new-room-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+
+    textarea {
+        margin-bottom: 1em;
+    }
+}

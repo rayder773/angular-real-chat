@@ -1,0 +1,22 @@
+.login-component {
+    max-width: 500px;
+    margin: 100px auto 0;
+}
+
+.login-component_header {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-component_login-button {
+    margin-right: 10px;
+    background: rgb(58, 202, 58);
+}
+
+.login-component_signup-button {
+    background: rgb(197, 207, 48);
+}

@@ -1,0 +1,26 @@
+<main class="login-component">
+  <div class="">
+    <div class="">
+      <h1 class="login-component_header">Log in or signup</h1>
+    </div>
+  </div>
+  <div class="">
+    <div class="">
+      <form class="form">
+        <input #email class="commot-input" type="email" name="email" placeholder="email">
+        <input #password class="commot-input" type="password" name="password" placeholder="password">
+        <div>
+          <button type="button" id="login" class="login-component_login-button common-button" (click)="login(email.value, password.value)">
+            Log in
+          </button>
+          <button type="button" id="signup" class="login-component_signup-button common-button" (click)="signup(email.value, password.value)">
+            Signup
+          </button>
+        </div>
+      </form>
+      <ul>
+        <li *ngFor="let m of messages">{{m}}</li>
+      </ul>
+    </div>
+  </div>
+</main>
