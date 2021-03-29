@@ -12,7 +12,7 @@
         <div class="room-description" [contentEditable]="isEditable">{{room.description}}</div>
         <button 
           class="delete-room-button"
-          (click)="deleteRoom(room.idR)"
+          (click)="deleteRoom(room.id)"
         >
           x
         </button>
@@ -56,16 +56,28 @@
     </section>
   </div>
   <div class="message-section">
-    <ul>
-      <li *ngFor="let message of messages$ | async">
-        {{message.text}}
+    <ul class="messages-list">
+      <li 
+        *ngFor="let message of messages$ | async"
+        class="message-body"
+      >
+        <strong>{{message.user.email}}</strong>
+        <div class="message-text">
+          {{message.text}}
+        </div>
+        <div 
+          class="message-like"
+          (click)="likeIt(message._id)"
+        >
+          <span>{{ messageLikes[message._id] ? 1 : 0 }}</span>
+          <button class="common-button" [class.active]="messageLikes[message._id]">&#x2764;</button>
+        </div>
       </li>
     </ul>
     <form id="send-message">
-      <input #message type="text" name="text" class="flex flex-1">
-      <button class="button-primary" (click)="sendMessage(message.value); message.value = ''">Send</button>
+      <input #message name="text" class="message-input">
+      <button class="common-button" (click)="sendMessage(message.value); message.value = ''">Send</button>
     </form>
-  
   </div>  
 </main>
 

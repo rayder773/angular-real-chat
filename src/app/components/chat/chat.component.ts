@@ -21,44 +21,49 @@ const defaultRooms = [
 })
 export class ChatComponent {
   users$: Observable<any[]>;
-  rooms: [];
+  rooms = [];
   isEditable = false;
   activeRoomId: number;
+  messages$: Observable<any[]>;
+  messageLikes = {};
+  roomMessages = {};
 
   constructor(private data: DataService, private auth: AuthService) {
     this.messages$ = data.messages$()
     .pipe(
         map((m: Paginated<any>) => {
-          console.log(m.data);
-          
           return m.data;
         }),
         map((m: Array<any>) => m.reverse()),
       )
          
     this.users$ = data.users$().pipe(
-        map((u: Paginated<any>) => u.data)
+        map((u: Paginated<any>) => {
+          return u.data
+        })
       );
 
     this.rooms = defaultRooms;
     this.activeRoomId = this.rooms[0].id;
   }
 
-  deleteRoom(id) {
-    console.log(id);
-    this.rooms = this.rooms.filter(r => r.id !== id)
-    
+  deleteRoom(id: number) {
+    this.rooms = this.rooms.filter(r => r.id !== id);
+
+    if(this.activeRoomId === id && this.rooms.length) {
+      this.activeRoomId = this.rooms[0].id;
+    }
   }
 
   addNewRoom(name: string, description: string) {
     this.rooms.push({
-      name: name || 'default name', 
-      description: description || 'default description', 
+      name: name || 'default name',
+      description: description || 'default description',
       id: uuidv4()
-    })    
+    })
   }
 
-  setActiveRoom(id) {
+  setActiveRoom(id: number) { 
     this.activeRoomId = id;
   }
 
@@ -66,10 +71,22 @@ export class ChatComponent {
     this.isEditable = isEditable;
   }
 
-  sendMessage(message: string) {
-    console.log('message', message);
-    
-    this.data.sendMessage(message);
+  likeIt(id: number) {
+    if(this.messageLikes[id]) {
+      delete this.messageLikes[id];
+      return;
+    }
+    this.messageLikes[id] = true
+  }
+
+  async sendMessage(message: string) {    
+    const sentMessage = await this.data.sendMessage(message);
+
+    if (this.roomMessages[this.activeRoomId]) {
+      this.roomMessages[this.activeRoomId].push(sentMessage._id)
+    } else {
+      this.roomMessages[this.activeRoomId] = [sentMessage._id]
+    }
   }
 
   logOut() {
