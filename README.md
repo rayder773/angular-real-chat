@@ -1,3 +1,7 @@
 # angular-real-chat
 
-To start run ```npm start```
+To start 
+  1. run backend https://github.com/feathersjs/feathers-chat
+  2. run ```npm start```
+
+
